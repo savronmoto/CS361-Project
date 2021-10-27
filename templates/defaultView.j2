@@ -1,0 +1,22 @@
+{% extends "main.j2" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block main %}
+
+    <div class="p-2">
+        <h1>{{ campaign }}!</h1>
+    </div>
+    {# {% for name in campaigns %}
+    <div class="p-2">
+        <h2><a href="#">{{ name }}</a></h2>
+    </div>
+    {% endfor %}   #}
+
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+{% endblock %}
