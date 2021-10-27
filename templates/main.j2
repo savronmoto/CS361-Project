@@ -62,7 +62,22 @@
                 <h1>The Adventurer's Field Notes</h1>
             </div>
             <div class="p-2 w-50 mx-auto">
-                <form>
+                <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.username.label }}<br>
+                        {{ form.username(size=32) }}
+                    </p>
+                    <p>
+                        {{ form.password.label }}<br>
+                        {{ form.password(size=32) }}
+                    </p>
+                    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                    <p>{{ form.submit() }}</p>
+                </form>    
+
+
+                {# <form>
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <input type="email" id="form3Example3" class="form-control form-control-lg"
@@ -84,7 +99,7 @@
                         style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button></a>
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!" class="link-danger">Register</a></p>
                     </div>
-                </form>
+                </form> #}
             </div>
 
         {% endblock %}

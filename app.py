@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, flash, redirect, url_for
 import os
-from flask.helpers import url_for
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
 
 # Configuration
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')  
+
 
 # Data
 
@@ -22,15 +25,28 @@ users = [
     }
 ]
 
+# Form Class
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
+
 # Routes 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def root():
-    return render_template("main.j2")
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+        return redirect('/menu')
+    return render_template('main.j2', title='Sign In', form=form)
 
-@app.route('/login')
-def login():
-    return render_template("login.j2", users = users)
+# @app.route('/login')
+# def login():
+#     return render_template("login.j2", users = users)
 
 @app.route('/menu/<campaign>', methods=['GET', 'POST'])
 def campaignView(campaign):

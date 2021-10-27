@@ -7,6 +7,18 @@
 {% block main %}
 
     <div class="p-2">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="mx-auto">
+            {% for message in messages %}
+            <li class="mx-auto">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="p-2">
         <h1>My Adventures!</h1>
     </div>
     {% for name in campaigns %}
