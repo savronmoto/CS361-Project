@@ -39,9 +39,24 @@ class LoginForm(FlaskForm):
 def root():
     form = LoginForm()
     if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect('/menu')
+        # flash('Login requested for user {}, remember_me={}'.format(
+        #     form.username.data, form.remember_me.data))
+        # return redirect(url_for('menu'))
+
+        # Placeholder code until I figure out actual request to login service
+        for dic in users:
+
+            if dic["username"] == form.username.data:
+                if dic["password"] == form.password.data:
+                    return redirect(url_for('menu'))
+                else:
+                    flash('Invalid password')
+                    return redirect(url_for('root'))
+
+            else:
+                flash('Invalid username')
+                return redirect(url_for('root'))        
+
     return render_template('main.j2', title='Sign In', form=form)
 
 # @app.route('/login')

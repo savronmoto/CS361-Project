@@ -26,11 +26,19 @@ a:active {
   color: blue;
 }
 
-.container-fluid{
+.container-fluid {
   padding: 0;
   height: 100%;
-  overflow-y: hidden; /* don't show content that exceeds my height */
+  /* overflow-y: hidden; don't show content that exceeds my height */
 }
+
+/* .album {
+  background-color: rgba(250, 235, 215, 0);
+}
+
+.container-sheer {
+  background-color: rgba(250, 235, 215, 0);
+} */
 
 h1 {
   font-size: 550%;
@@ -40,12 +48,19 @@ h1 {
 h2 {
   font-size: 200%;
   font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
 }
 
-/* li {
-  position: absolute;
-  right: 0;
-} */
+p {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-align: center;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 30vw;
+  object-fit: cover;
+}
 
 logo {
   height: 30px;

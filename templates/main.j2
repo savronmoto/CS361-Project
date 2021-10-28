@@ -42,7 +42,7 @@
                                     <a class="dropdown-item" href="#">NPCs</a>
                                     <a class="dropdown-item" href="#">Locations</a>
                                     <a class="dropdown-item" href="#">Notes</a>
-                                    <a class="dropdown-item" href="/">Logout</a>
+                                    <a class="dropdown-item" href="{{ url_for('root') }}">Logout</a>
                                 </div>
                         </li>
                         {# <li class="nav-item pr-4">
@@ -55,25 +55,46 @@
         {% endblock %} 
         </header>
 
-        <main class="container d-flex w-75 h-100 p-3 justify-content-center flex-column text-center">
         {% block main %}
+        <main class="container d-flex w-75 h-100 p-3 justify-content-center flex-column text-center">
 
             <div class="p-2">
                 <h1>The Adventurer's Field Notes</h1>
             </div>
+
+            <!-- Invalid login flash -->
+            <div class="p-2 mx-auto">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>                    
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            <!-- https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms -->
             <div class="p-2 w-50 mx-auto">
                 <form action="" method="post" novalidate>
                     {{ form.hidden_tag() }}
                     <p>
                         {{ form.username.label }}<br>
                         {{ form.username(size=32) }}
+                        {% for error in form.username.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
                     </p>
                     <p>
                         {{ form.password.label }}<br>
                         {{ form.password(size=32) }}
+                        {% for error in form.password.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
                     </p>
                     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-                    <p>{{ form.submit() }}</p>
+                    <button type="button" class="btn btn-light">{{ form.submit() }}</button>
                 </form>    
 
 
@@ -102,8 +123,8 @@
                 </form> #}
             </div>
 
-        {% endblock %}
         </main>
+        {% endblock %}
 
         <footer class="mt-auto text-white-50">
             <p>Made by <a href="https://github.com/savronmoto" class="text-white">Savanna Hanson</a></p>
