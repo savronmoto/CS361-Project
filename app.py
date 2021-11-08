@@ -39,11 +39,19 @@ class LoginForm(FlaskForm):
 def root():
     form = LoginForm()
     if form.validate_on_submit():
-        # flash('Login requested for user {}, remember_me={}'.format(
-        #     form.username.data, form.remember_me.data))
-        # return redirect(url_for('menu'))
-
+    
         # Placeholder code until I figure out actual request to login service
+        # Will be something like:
+        # credentials = form.username.data + ":" + form.password.data
+        # request_file = open("request.txt", 'w+')
+        # request_file.write(credentials)
+        # response_file = open("response.txt", 'r+')
+        # response_file.truncate(0)
+        # valid = response_file.read()
+        # if valid:
+        #   credentials were correct, go to menu
+        # else:
+        #   credentials were incorrenct, flash error and reload main page
         for dic in users:
 
             if dic["username"] == form.username.data:
@@ -59,9 +67,6 @@ def root():
 
     return render_template('main.j2', title='Sign In', form=form)
 
-# @app.route('/login')
-# def login():
-#     return render_template("login.j2", users = users)
 
 @app.route('/menu/<campaign>', methods=['GET', 'POST'])
 def campaignView(campaign):
