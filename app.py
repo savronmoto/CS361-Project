@@ -39,31 +39,40 @@ class LoginForm(FlaskForm):
 def root():
     form = LoginForm()
     if form.validate_on_submit():
-    
-        # Placeholder code until I figure out actual request to login service
-        # Will be something like:
-        # credentials = form.username.data + ":" + form.password.data
-        # request_file = open("request.txt", 'w+')
-        # request_file.write(credentials)
-        # response_file = open("response.txt", 'r+')
-        # response_file.truncate(0)
-        # valid = response_file.read()
-        # if valid:
-        #   credentials were correct, go to menu
-        # else:
-        #   credentials were incorrenct, flash error and reload main page
-        for dic in users:
-
-            if dic["username"] == form.username.data:
-                if dic["password"] == form.password.data:
+        # Open the pipe file
+        credentials_file = open("CS361-David-Service/credentials.txt", 'r+')
+        # Parse the text into a string, and then into a list
+        cred_string = credentials_file.read()
+        cred_list = cred_string.split(", ")
+        # Iterate over credentials
+        # Allow access for correct credentials, otherwise flash incorrect portion
+        for i in range(len(cred_list) - 1):
+            if cred_list[i] == form.username.data:
+                if cred_list[i+1] == form.password.data:
                     return redirect(url_for('menu'))
                 else:
                     flash('Invalid password')
                     return redirect(url_for('root'))
+            
+        credentials_file.close()
 
-            else:
-                flash('Invalid username')
-                return redirect(url_for('root'))        
+        flash('Invalid username')
+        return redirect(url_for('root'))
+
+           
+
+        # for dic in users:
+
+        #     if dic["username"] == form.username.data:
+        #         if dic["password"] == form.password.data:
+        #             return redirect(url_for('menu'))
+        #         else:
+        #             flash('Invalid password')
+        #             return redirect(url_for('root'))
+
+        #     else:
+        #         flash('Invalid username')
+        #         return redirect(url_for('root'))        
 
     return render_template('main.j2', title='Sign In', form=form)
 
