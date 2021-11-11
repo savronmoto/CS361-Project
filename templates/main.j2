@@ -95,7 +95,8 @@
                         {% endfor %}
                     </p>
                     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-                    <button type="button" class="btn btn-light">{{ form.submit() }}</button>
+                    <input id="submit" class="btn btn-light" name="submit" type="submit" value="Sign In">
+                    <a href="http://127.0.0.1:5000/register" class="btn btn-light" role="button">Register</a>
                 </form>    
 
 
