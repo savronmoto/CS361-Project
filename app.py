@@ -25,6 +25,49 @@ users = [
     }
 ]
 
+npcs = [
+    {
+        "name": "Reaner Neverember",
+        "desc": "Some noble guy."
+    },
+    {
+        "name": "Volothamp Geddarm",
+        "desc": "Sent us on the job, paid us with a house."
+    },
+    {
+        "name": "Durnan",
+        "desc": "Owner of the Yawning Portal."
+    },
+    {
+        "name": "Yagra Stonefist",
+        "desc": "Orc lady, member of the Doom Raiders, a subset of the Zentharum faction."
+    }
+]
+
+locations = [
+    {
+        "name": "Old Xoblob's Shop",
+        "desc": "A shop where everything inside is purple. It is across the street from the Skewered Dragon on Net St & Flay Ln."
+    },
+    {
+        "name": "The Yawning Portal",
+        "desc": "Famous tavern in Waterdeep known for drawing adventurers. There is a giant hole that leads to Undermount."
+    },
+    {
+        "name": "Sewer Throne Room",
+        "desc": "Where we ended up after searching the sewers. Seems like goblins lived here."
+    }
+]
+
+notes = [
+    "Xoblob told me my cloak had a 'special property involving water?'",
+    "Za-ev is charmed for 4 more hours",
+    "Lost my shoes when Hugh threw me over the wall.",
+    "City Guards = walls, City Watch = everywhere",
+    "Rainer's father embezzled $500,000 to Neverwinter?"
+
+]
+
 # Form Class
 
 class LoginForm(FlaskForm):
@@ -85,15 +128,17 @@ def campaignView(campaign):
 def menu():
     return render_template("menu.j2", campaigns=campaigns)
 
-    # if request.method == 'GET':
-    #     return render_template("menu.j2", campaigns=campaigns)
-    # elif request.method == 'POST':
-    #     data = request.form.get("campaigns")
-    #     return redirect(url_for('campaign', campaign=data))
+@app.route('/menu/<campaign>/NPCs', methods=['GET', 'POST'])
+def npcView(campaign):
+    return render_template("NPCs.j2", campaign=campaign, npcs=npcs)
 
+@app.route('/menu/<campaign>/Locations', methods=['GET', 'POST'])
+def locationView(campaign):
+    return render_template("locations.j2", campaign=campaign, locations=locations)
 
-
-
+@app.route('/menu/<campaign>/Notes', methods=['GET', 'POST'])
+def notesView(campaign):
+    return render_template("notes.j2", campaign=campaign, notes=notes)
 # Listener
 
 if __name__ == "__main__":
