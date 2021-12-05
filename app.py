@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for
 import os
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 
 # Configuration
@@ -76,6 +76,21 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+class NpcAddForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    desc = TextAreaField('Description', render_kw={"rows": 10, "cols": 40}, validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class LocationAddForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    desc = TextAreaField('Description', render_kw={"rows": 10, "cols": 40}, validators=[DataRequired()])
+    submit = SubmitField('Submit')    
+
+class NotesAddForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    desc = TextAreaField('Description', render_kw={"rows": 10, "cols": 40}, validators=[DataRequired()])
+    submit = SubmitField('Submit')
+    
 # Routes 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -102,21 +117,6 @@ def root():
         flash('Invalid username')
         return redirect(url_for('root'))
 
-           
-
-        # for dic in users:
-
-        #     if dic["username"] == form.username.data:
-        #         if dic["password"] == form.password.data:
-        #             return redirect(url_for('menu'))
-        #         else:
-        #             flash('Invalid password')
-        #             return redirect(url_for('root'))
-
-        #     else:
-        #         flash('Invalid username')
-        #         return redirect(url_for('root'))        
-
     return render_template('main.j2', title='Sign In', form=form)
 
 
@@ -130,7 +130,14 @@ def menu():
 
 @app.route('/menu/<campaign>/NPCs', methods=['GET', 'POST'])
 def npcView(campaign):
-    return render_template("NPCs.j2", campaign=campaign, npcs=npcs)
+    form = NpcAddForm()
+    if form.validate_on_submit():
+        npcs.append({   "name" : form.name.data,
+                        "desc" : form.desc.data}) 
+        return redirect(url_for('npcView', campaign=campaign))
+
+
+    return render_template("NPCs.j2", campaign=campaign, npcs=npcs, form=form)
 
 @app.route('/menu/<campaign>/Locations', methods=['GET', 'POST'])
 def locationView(campaign):
