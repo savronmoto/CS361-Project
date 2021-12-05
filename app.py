@@ -65,8 +65,8 @@ notes = [
     "Lost my shoes when Hugh threw me over the wall.",
     "City Guards = walls, City Watch = everywhere",
     "Rainer's father embezzled $500,000 to Neverwinter?"
-
 ]
+
 
 # Form Class
 

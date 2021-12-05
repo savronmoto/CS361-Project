@@ -24,7 +24,7 @@
     <div class="container-fluid">
     {% block content %}
 
-         <!-- Navbar -->
+        <!-- Navbar -->
         <header>
         {% block header %}
 
@@ -39,9 +39,10 @@
                             Menu
                             </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">NPCs</a>
-                                    <a class="dropdown-item" href="#">Locations</a>
-                                    <a class="dropdown-item" href="#">Notes</a>
+                                    <a class="dropdown-item" href="{{ url_for('npcView', campaign = campaign) }}">NPCs</a>
+                                    <a class="dropdown-item" href="{{ url_for('locationView', campaign=campaign) }}">Locations</a>
+                                    <a class="dropdown-item" href="{{ url_for('notesView', campaign=campaign) }}">Notes</a>
+                                    <a class="dropdown-item" href="{{ url_for('menu', campaign=campaign) }}">Campaigns</a>
                                     <a class="dropdown-item" href="{{ url_for('root') }}">Logout</a>
                                 </div>
                         </li>
