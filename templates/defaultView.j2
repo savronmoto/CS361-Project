@@ -11,7 +11,7 @@
     <div class="row py-lg-2">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">{{campaign}}</h1>
-        <p class="lead">People, Places, and Things of note, in the jewel of the Sword Coast.</p>
+        <p class="lead">People, Places, and Things of note for the {{campaign}} campaign.</p>
       </div>
     </div>
   </section>
@@ -24,7 +24,7 @@
           <div class="card shadow-sm">
             <img src="/static/oldman.jpeg" class="card-img-top" alt="old man">
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text">View all the Non-Playable Characters you've encountered during {{campaign}}.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm"><a href="{{ url_for('npcView', campaign=campaign) }}">View All</a></button>
@@ -39,7 +39,7 @@
             <img src="/static/tavern.jpeg" class="card-img-top" alt="tavern">
 
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text">View all the interesting Locations you've been to during {{campaign}}.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm"><a href="{{ url_for('locationView', campaign=campaign) }}">View All</a></button>
@@ -54,7 +54,7 @@
             <img src="/static/crystal.jpeg" class="card-img-top" alt="crystal">
 
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text">View all the notes you thought you'd need to remember during {{campaign}}.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm"><a href="{{ url_for('notesView', campaign=campaign) }}">View All</a></button>

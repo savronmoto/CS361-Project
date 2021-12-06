@@ -47,7 +47,7 @@ npcs = [
 locations = [
     {
         "name": "Old Xoblob's Shop",
-        "desc": "A shop where everything inside is purple. It is across the street from the Skewered Dragon on Net St & Flay Ln."
+        "desc": "A shop where everything inside is purple. Across the street from the Skewered Dragon on Net St & Flay Ln."
     },
     {
         "name": "The Yawning Portal",
