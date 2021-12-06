@@ -87,10 +87,9 @@ class LocationAddForm(FlaskForm):
     submit = SubmitField('Submit')    
 
 class NotesAddForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
     desc = TextAreaField('Description', render_kw={"rows": 10, "cols": 40}, validators=[DataRequired()])
     submit = SubmitField('Submit')
-    
+
 # Routes 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -136,21 +135,27 @@ def npcView(campaign):
                         "desc" : form.desc.data}) 
         return redirect(url_for('npcView', campaign=campaign))
 
-
     return render_template("NPCs.j2", campaign=campaign, npcs=npcs, form=form)
 
 @app.route('/menu/<campaign>/Locations', methods=['GET', 'POST'])
 def locationView(campaign):
-    return render_template("locations.j2", campaign=campaign, locations=locations)
+    form = LocationAddForm()
+    if form.validate_on_submit():
+        locations.append({   "name" : form.name.data,
+                        "desc" : form.desc.data}) 
+        return redirect(url_for('locationView', campaign=campaign))
+    return render_template("locations.j2", campaign=campaign, locations=locations, form=form)
 
 @app.route('/menu/<campaign>/Notes', methods=['GET', 'POST'])
 def notesView(campaign):
-    return render_template("notes.j2", campaign=campaign, notes=notes)
+    form = NotesAddForm()
+    if form.validate_on_submit():
+        notes.append(form.desc.data) 
+        return redirect(url_for('notesView', campaign=campaign))
+    return render_template("notes.j2", campaign=campaign, notes=notes, form=form)
+
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 9112)) 
-    #                                 ^^^^
-    #              You can replace this number with any valid port
-    
+    port = int(os.environ.get('PORT', 9112))     
     app.run(port=port, debug=True)
