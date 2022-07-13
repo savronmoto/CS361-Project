@@ -1,1 +1,0 @@
-$ source 361env/bin/activate
